@@ -1,3 +1,5 @@
+console.log("hello");
+/////////////////////////////////////////////////////////////
 ////////essaie button storage
 const storageInput = document.querySelector(".storage");
 const text = document.querySelector(".text");
@@ -18,29 +20,65 @@ const saveToLocalStorage = () => {
 };
 
 button.addEventListener("click", saveToLocalStorage);
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+//////////fetch api
 
-// // // //essai get api
+//////////////////////////////////////////////////////////////
+/// Chargement HTML avant JS
 let url = "http://localhost:3000/api/cameras";
 window.onload = function () {
   fetch(url)
     .then((response) => response.json())
     .then((response) => insertProduct(response));
 };
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+//// Fonction Pour La Creation Des Articles De L'Index
 const insertProduct = (response) => {
-  let test = document.querySelector("#test");
-  console.log(test);
+  let allArticles = ""; //Pour inclure les articles suivants
+  let mainArticle = document.querySelector("#main");
+
   for (i = 0; i < response.length; i++) {
-    console.log(response[i]);
-    test.innerHTML += "<h2>" + response[i].name + "</h2>";
-    test.innerHTML += "<p>" + response[i].description + "</p>";
-    test.innerHTML += "<p>" + response[i].price + "</p>";
-    test.innerHTML += "<img src='" + response[i].imageUrl + "'>";
-    test.innerHTML +=
+    let article =
+      '<section class="card shadow col-4">' +
+      "<h2>" +
+      response[i].name +
+      "</h2>" +
+      "<img class='card-img-top w-100' src='" +
+      response[i].imageUrl +
+      "'>" +
+      '<div class="card-body">' +
+      '<p class="card-text">' +
+      response[i].description +
+      "</p>" +
+      '<p class="card-text">' +
+      response[i].price / 100 +
+      "$" +
+      "</p>" +
       "<a href='produit.html?id=" +
       response[i]._id +
-      "'>Voir la fiche produit</a>";
+      "'>Voir la fiche produit</a>" +
+      "</div>" +
+      "</section>";
+    console.log(article);
+
+    //main.innerHTML += "<h2>" + response[i].name + "</h2>";
+    //main.innerHTML += "<img class='card-img-top' src='" + response[i].imageUrl + "'>";
+    // main.innerHTML +=
+    //   "<a href='produit.html?id=" +
+    //   response[i]._id +
+    //   "'>Voir la fiche produit</a>";
+    //main.innerHTML += "<p>" + response[i].description + "</p>";
+    //main.innerHTML += "<p>" + response[i].price / 100 + "</p>"; //voir si on fait comme ca simplement
+    allArticles += article; // concatenation des articles
   }
+  mainArticle.innerHTML = allArticles;
+  console.log(mainArticle);
 };
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 // function Rer(x) {
 //   console.log(x.current_condition.condition);
 //   document.getElementById('weather-result').innerHTML = x.current_condition.condition;
