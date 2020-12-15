@@ -1,3 +1,7 @@
+<!-- une page “produit”, qui affiche de manière dynamique l'élément
+sélectionné par l'utilisateur et lui permet de personnaliser le produit et de
+l'ajouter à son panier ; -->
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -48,20 +52,7 @@
       </nav>
     </header>
     <main>
-      <div class="container bg-primary col-lg-2">
-        <input class="storage mx-auto" type="text" />
-        <p class="text mx-auto">Text</p>
-        <button class="button mx-auto">save</button>
-      </div>
-      <!-- <div class="form-group container">
-        <label for="exampleFormControlInput1">Email address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="name@example.com"
-        />
-      </div> -->
+    
       <section class="container">
         <div class="row justify-content-md-center">
           <div class="col-md-auto">
@@ -71,17 +62,19 @@
           </div>
         </div>
       </section>
-      <section>
-        <h2 class="text-center m-3 py-auto">Voici notre selection</h2>
-        <div class="container">
-          <div class="row"></div>
-        </div>
-      </section>
 
       <section
-        id="main"
-        class="d-flex container justify-content-center col-10 flex-wrap"
-      ></section>
+      id="main"
+      class="d-flex container justify-content-center col-10 flex-wrap"
+    ></section>
+    <section id="addToBasket">
+
+    </section>
+
+
+
+
+
     </main>
     <footer class="pt-5">
       <div class="container">
@@ -114,7 +107,7 @@
       </div>
     </footer>
     <script src="mainFetch.js"></script>
-    <script src="index.js"></script>
+    <script src="product.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
