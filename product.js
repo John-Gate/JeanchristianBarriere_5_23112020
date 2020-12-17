@@ -1,56 +1,10 @@
+//Variable pour atteindre element specifique.
+let url ="http://localhost:3000/api/cameras/";
 const URLSParams = new URLSearchParams(window.location.search);
 let objectId = URLSParams.get('id');
-let idParams;
-if (objectId === null) {
-    idParams = "";
-} else {
-    idParams = objectId;
-}
 
-//
-function getCamera(id) {
-  fetch("http://localhost:3000/api/cameras/" + id)
-    .then(response => response.json())
-    .then(produit => {
-      selectedProduct(produit);
-      // Ecouter les clics sur le bouton addToBasket
-      let addItemToBasket = document.querySelector("#addToBasket");
-      addItemToBasket.addEventListener("click", function () {addToBasket(produit)}, false);
-  })
-}
 
-unction addToBasket(produit) {
-  //Création du panier dans le localStorage s'il n'existe pas déjà
-  if (typeof localStorage.getItem("basket") !== "string") {
-    let basket = [];
-    localStorage.setItem("basket", JSON.stringify(basket));
-  }
-  //Récupérer les informations de la caméra
-  produit.selectedLense = document.querySelector("option:checked").innerText;
-  produit.selectedQuantity = document.querySelector("input").value;
-  delete produit.lenses;
-  //création d'une variable pour manipuler le panier
-  let basket = JSON.parse(localStorage.getItem("basket"));
-  //Vérification que l'item n'existe pas déjà dans le panier
-  let isThisItemExist = false;
-  let existingItem;
-  for (let i = 0; i < basket.length; i++) {
-    if (produit._id === basket[i]._id && produit.price === basket[i].price && produit.selectedLense === basket[i].selectedLense) {
-      isThisItemExist = true;
-      existingItem = basket[i];
-    }
-  }
-  //Ajouter la caméra au panier
-  if (isThisItemExist === false) {
-    basket.push(produit);
-    localStorage.setItem("basket", JSON.stringify(basket));
-  } else {
-    existingItem.selectedQuantity = parseInt(existingItem.selectedQuantity, 10) + parseInt(produit.selectedQuantity, 10);
-    localStorage.setItem("basket", JSON.stringify(basket));
-  }
-  manageBasketDisplay();
-}
-
+//HTML displayt
 const selectedProduct = (produit) => {
   let mainArticle = document.querySelector("#main");
   let sectionCont = document.createElement("section");
@@ -83,20 +37,52 @@ const selectedProduct = (produit) => {
   price.appendChild(priceproduit)
   div.appendChild(price);
 
-  let idProduct = document.createElement("a");
-  idProduct.className="text-decoration-none stretched-link";
-  idProduct.href='product.html?id=' + produit._id;
-  idProduct.innerHTML="Voir la fiche produit";
+  let idProduct = document.createElement("button");
+  idProduct.className=" col-12 button text-decoration-none btn-primary mb-2";
+  idProduct.innerHTML="Ajouter au panier";
   div.appendChild(idProduct);
-  
-  for(i=0;i<produit.options.length;i++){
+
+  let select = document.createElement("select");
+  select.className="selectProd";
+  let chooseProd = document.getElementsByClassName("selectProd");
+
+//Boucle des differentes options du produit
+  for(i=0;i<produit.lenses.length;i++){
   let optionProduct = document.createElement("option");
-  optionProduct.innerHTML= produit.options[i];
-  div.appendChild(optionProduct);
-  }
-
+  optionProduct.className="option";
+  optionProduct.innerHTML= produit.lenses[i];
+  select.appendChild(optionProduct);
+}
+  div.appendChild(select);
   sectionCont.appendChild(div);
-};      
+  storageProduct();
+}; 
+//Ajouter au panier
+const storageProduct=()=>{
+  let basketButton = document.getElementsByClassName("button");
+  basketButton[0].addEventListener("click", function(){
+    let basketGet = JSON.parse(localStorage.getItem("basket"))
+    if(basketGet === null){
+      basketGet=[];
+    }
+    basketGet.push(objectId);
+    localStorage.setItem("basket", JSON.stringify(basketGet));
+    document.location.replace("http://127.0.0.1:5500/panier.html");
+});
 
-manageBasketDisplay();
-getCamera(id);
+let basketGet = JSON.parse(localStorage.getItem("basket"));
+for(i=basketGet.length-1; i>=0;i--){
+console.log(basketGet[i]);
+
+}
+}
+
+const fetchCall=()=>{
+  if(window.location.search)
+fetch(url + objectId)
+  .then(response => response.json())
+  .then(response=>selectedProduct(response))
+  .catch(err=>console.error(err));
+}
+fetchCall();
+

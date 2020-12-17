@@ -1,3 +1,19 @@
+let url = "http://localhost:3000/api/cameras";
+
+const mainFetch = () => {
+  fetch(url)
+  
+    .then((response) => response.json())
+    .then(function (data) {
+      for (i = 0; i < data.length; i++) {
+        insertProduct(data[i]);
+      }
+      
+    })
+    .catch(err=>console.error(err))
+};
+window.onload = mainFetch;
+
 //// Fonction Pour La Creation Des Articles De L'Index
 const insertProduct = (produit) => {
   let mainArticle = document.querySelector("#main");
