@@ -1,8 +1,7 @@
 //Variable pour atteindre element specifique.
-let url ="http://localhost:3000/api/cameras/";
+let url = "http://localhost:3000/api/cameras/";
 const URLSParams = new URLSearchParams(window.location.search);
-let objectId = URLSParams.get('id');
-
+let objectId = URLSParams.get("id");
 
 //HTML displayt
 const selectedProduct = (produit) => {
@@ -13,7 +12,7 @@ const selectedProduct = (produit) => {
 
   let titleMain = document.createElement("h2");
   let titleproduit = document.createTextNode(produit.name);
-  titleMain.className='text-center';
+  titleMain.className = "text-center";
   titleMain.appendChild(titleproduit);
   sectionCont.appendChild(titleMain);
 
@@ -28,56 +27,55 @@ const selectedProduct = (produit) => {
   let descrip = document.createElement("p");
   descrip.className = "card-text";
   let descproduit = document.createTextNode(produit.description);
-  descrip.appendChild(descproduit)
+  descrip.appendChild(descproduit);
   div.appendChild(descrip);
 
   let price = document.createElement("p");
   price.className = "card-text";
-  let priceproduit = document.createTextNode(produit.price / 100 + "$" );
-  price.appendChild(priceproduit)
+  let priceproduit = document.createTextNode(produit.price / 100 + "$");
+  price.appendChild(priceproduit);
   div.appendChild(price);
 
   let idProduct = document.createElement("button");
-  idProduct.className=" col-12 button text-decoration-none btn-primary mb-2";
-  idProduct.innerHTML="Add to cart";
+  idProduct.className = " col-12 button text-decoration-none btn-primary mb-2";
+  idProduct.innerHTML = "Add to cart";
   div.appendChild(idProduct);
 
   let select = document.createElement("select");
-  select.className="selectProd";
+  select.className = "selectProd";
   let chooseProd = document.getElementsByClassName("selectProd");
 
-//Boucle des differentes options du produit
-  for(i=0;i<produit.lenses.length;i++){
-  let optionProduct = document.createElement("option");
-  optionProduct.className="option";
-  optionProduct.innerHTML= produit.lenses[i];
-  select.appendChild(optionProduct);
-}
+  //Boucle des differentes options du produit
+  for (i = 0; i < produit.lenses.length; i++) {
+    let optionProduct = document.createElement("option");
+    optionProduct.className = "option";
+    optionProduct.innerHTML = produit.lenses[i];
+    select.appendChild(optionProduct);
+  }
   div.appendChild(select);
   sectionCont.appendChild(div);
   storageProduct();
-}; 
+};
 //Ajouter au panier
-const storageProduct=()=>{
+const storageProduct = () => {
   let cartButton = document.getElementsByClassName("button");
-  cartButton[0].addEventListener("click", function(){
-    let cartGet = JSON.parse(localStorage.getItem("cart"))
-    if(cartGet === null){
-      cartGet=[];
+  cartButton[0].addEventListener("click", function () {
+    let cartGet = JSON.parse(localStorage.getItem("cart"));
+    if (cartGet === null) {
+      cartGet = [];
     }
     cartGet.push(objectId);
     localStorage.setItem("cart", JSON.stringify(cartGet));
     document.location.replace("http://127.0.0.1:5500/cart.html");
-});
-let cartGet = JSON.parse(localStorage.getItem("cart"));
-}
+  });
+  let cartGet = JSON.parse(localStorage.getItem("cart"));
+};
 
-const fetchCall=()=>{
-  if(window.location.search)
+const fetchCall = () => {
+  if (window.location.search)
     fetch(url + objectId)
-    .then(response => response.json())
-    .then(response=>selectedProduct(response))
-    .catch(err=>console.error(err));
-}
+      .then((response) => response.json())
+      .then((response) => selectedProduct(response))
+      .catch((err) => console.error(err));
+};
 fetchCall();
-

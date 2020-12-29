@@ -2,16 +2,13 @@ let url = "http://localhost:3000/api/cameras";
 
 const mainFetch = () => {
   fetch(url)
-  
     .then((response) => response.json())
-    
-    
     .then(function (data) {
       for (i = 0; i < data.length; i++) {
         insertProduct(data[i]);
-      } 
+      }
     })
-    .catch(err=>console.error(err))
+    .catch((err) => console.error(err));
 };
 window.onload = mainFetch;
 
@@ -24,7 +21,7 @@ const insertProduct = (produit) => {
 
   let titleMain = document.createElement("h2");
   let titleData = document.createTextNode(produit.name);
-  titleMain.className='text-center';
+  titleMain.className = "text-center";
   titleMain.appendChild(titleData);
   sectionCont.appendChild(titleMain);
 
@@ -39,22 +36,20 @@ const insertProduct = (produit) => {
   let descrip = document.createElement("p");
   descrip.className = "card-text";
   let descData = document.createTextNode(produit.description);
-  descrip.appendChild(descData)
+  descrip.appendChild(descData);
   div.appendChild(descrip);
 
   let price = document.createElement("p");
   price.className = "card-text";
-  let priceData = document.createTextNode(produit.price / 100 + "$" );
-  price.appendChild(priceData)
+  let priceData = document.createTextNode(produit.price / 100 + "$");
+  price.appendChild(priceData);
   div.appendChild(price);
 
   let idProduct = document.createElement("a");
-  idProduct.className="text-decoration-none stretched-link";
-  idProduct.href='product.html?id=' + produit._id;
-  idProduct.innerHTML="Check it out";
+  idProduct.className = "text-decoration-none stretched-link";
+  idProduct.href = "product.html?id=" + produit._id;
+  idProduct.innerHTML = "Check it out";
   div.appendChild(idProduct);
-  
 
   sectionCont.appendChild(div);
 };
-
