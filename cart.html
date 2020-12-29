@@ -1,11 +1,5 @@
-<!-- une page “panier” contenant un résumé des produits dans le panier, le prix
-total et un formulaire permettant de passer une commande. Les données
-du formulaire doivent être correctes et bien formatées avant d'être
-renvoyées au back-end. Par exemple, pas de texte dans les champs date ;-->
-
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="eng">
   <head>
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -35,8 +29,8 @@ renvoyées au back-end. Par exemple, pas de texte dans les champs date ;-->
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" href="index.html">Accueil<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="panier.html">Panier</a>
+            <a class="nav-item nav-link active" href="index.html">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="cart.html">Cart</a>
           </div>
         </div>
       </nav>
@@ -45,46 +39,49 @@ renvoyées au back-end. Par exemple, pas de texte dans les champs date ;-->
       <section class="container">
         <div class="row justify-content-md-center">
           <div class="col-md-auto">
-            <h1 class="text-center m-5py-auto" id="camera">
-              Meilleur prix garanti.
+            <h1 class="text-center mt-5 py-auto " id="camera">
+              Shop the best deals and sales on offer right now.
             </h1>
           </div>
         </div>
       </section>
 
       <section
-      id="mainBasket"
-      class="d-flex container justify-content-center col-10 flex-wrap"
+      id="mainCart"
+      class="d-flex container col-10 flex-wrap flex-column text-center my-2"
     ></section>
+    <section
+    id="total"
+    class="d-flex container justify-content-center my-4"
+  ></section>
 
-    <section class="mainForm container d-none" id="mainForm">
-      <form class="d-flex justify-content-center flex-column col-12">
+    <section class="mainForm container" id="mainForm">
+      <form class="d-flex justify-content-center flex-column col-12" id="formSubmit">
           <div class="col-md-12 mb-3">
-            <label for="validationServer01">First name</label>
-            <input type="text" class="form-control" id="validationServer01" value="" required>
+            <label for="firstName">First name</label>
+            <!-- Delete type="" in the input to let regEx rule over bootstrap-->
+            <input  class="form-control" id="formFirstName">
           </div>
           <div class="col-md-12 mb-3">
-            <label for="validationServer02">Last name</label>
-            <input type="text" class="form-control " id="validationServer02" value="" required>
+            <label for="lastName">Last name</label>
+            <input  class="form-control " id="formLastName">
           </div>
           <div class="col-md-12 mb-3">
-            <label for="validationServer01">Email</label>
-            <input type="text" class="form-control" id="validationServer01" value="" required>
+            <label for="address">Address</label>
+            <input  class="form-control" id="formAddress">
           </div>
           <div class="col-md-12 mb-3">
-            <label for="validationServer01">Adress</label>
-            <input type="text" class="form-control" id="validationServer01" value="" required>
+            <label for="city">City</label>
+            <input  class="form-control " id="formCity">
           </div>
           <div class="col-md-12 mb-3">
-            <label for="validationServer02">City</label>
-            <input type="text" class="form-control " id="validationServer02" value="" required>
+            <label for="email">Email</label>
+            <input  class="form-control" id="formEmail">
           </div>
-          <button class="btn btn-primary" type="submit">Submit form</button>
+          <button class="btn btn-primary col-3 " type="submit">Place your order</button>
       </form>
     </section>
-                
-
-
+    
   </main>
     <footer class="pt-5">
       <div class="container">
@@ -92,23 +89,22 @@ renvoyées au back-end. Par exemple, pas de texte dans les champs date ;-->
           <div class="col">
             <ul class="list-unstyled list-inline text-center">
               <li class="list-inline-item">
-                <a href="#" class="text-info text-decoration-none">À propos</a>
+                <a href="#" class="text-info text-decoration-none">Warranties</a>
               </li>
               <li class="list-inline-item">&middot;</li>
               <li class="list-inline-item">
-                <a href="#" class="text-info text-decoration-none"
-                  >Vie privée</a
+                <a href="#" class="text-info text-decoration-none">Why shop with us</a
                 >
               </li>
               <li class="list-inline-item">&middot;</li>
               <li class="list-inline-item">
                 <a href="#" class="text-info text-decoration-none"
-                  >Conditions d'utilisations</a
+                  >Term of Services</a
                 >
               </li>
               <li class="list-inline-item">
                 <a href="#" class="text-info text-decoration-none"
-                  >Contactez-nous</a
+                  >Contact-Us</a
                 >
               </li>
             </ul>
@@ -117,7 +113,7 @@ renvoyées au back-end. Par exemple, pas de texte dans les champs date ;-->
       </div>
     </footer>
     <script src="product.js"></script>
-    <script src="basket.js"></script>
+    <script src="cart.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

@@ -22,34 +22,29 @@
   <body>
     <header class="bg-light">
       <nav class="navbar navbar-expand-lg navbar-light container">
-        <!-- <img src="/favicon/favicon-32x32.png" class="mr-3 logo-navbar"></img> -->
         <a class="navbar-brand" id="navbar-brand" href="index.html">Orinoco</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler"type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" href="index.html">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="index.html"
+              >Home<span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="cart.html">Cart</a>
           </div>
         </div>
       </nav>
     </header>
-    <main>
-      <section class="container">
-        <div class="row justify-content-md-center">
-          <div class="col-md-auto">
-            <h1 class="text-center m-5py-auto" id="camera">
-              Shop the best deals and sales on offer right now.
-            </h1>
-          </div>
-        </div>
+    <main class=" container d-flex">
+      <section class="mainOrder col-12 text-center">
+        <h1>Thank you for your purchase!</h1>
+        <hr class="w-50 border-white">
+        <p class="invoice" id="invoice">Your invoice Number is :</p>
+        <hr class="w-25 border-white">
+        <h4 id="total"></h4>
+        <div id="cart" class="d-flex justify-content-center"></div>
       </section>
-      <section
-      id="main"
-      class="d-flex container justify-content-center col-10 flex-wrap"
-    ></section>
-</main>
+    </main>
     <footer class="pt-5">
       <div class="container">
         <div class="row">
@@ -79,7 +74,7 @@
         </div>
       </div>
     </footer>
-    <script src="product.js"></script>
+    <script src="order.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

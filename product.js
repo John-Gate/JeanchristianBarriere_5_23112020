@@ -39,7 +39,7 @@ const selectedProduct = (produit) => {
 
   let idProduct = document.createElement("button");
   idProduct.className=" col-12 button text-decoration-none btn-primary mb-2";
-  idProduct.innerHTML="Ajouter au panier";
+  idProduct.innerHTML="Add to cart";
   div.appendChild(idProduct);
 
   let select = document.createElement("select");
@@ -59,30 +59,25 @@ const selectedProduct = (produit) => {
 }; 
 //Ajouter au panier
 const storageProduct=()=>{
-  let basketButton = document.getElementsByClassName("button");
-  basketButton[0].addEventListener("click", function(){
-    let basketGet = JSON.parse(localStorage.getItem("basket"))
-    if(basketGet === null){
-      basketGet=[];
+  let cartButton = document.getElementsByClassName("button");
+  cartButton[0].addEventListener("click", function(){
+    let cartGet = JSON.parse(localStorage.getItem("cart"))
+    if(cartGet === null){
+      cartGet=[];
     }
-    basketGet.push(objectId);
-    localStorage.setItem("basket", JSON.stringify(basketGet));
-    document.location.replace("http://127.0.0.1:5500/panier.html");
+    cartGet.push(objectId);
+    localStorage.setItem("cart", JSON.stringify(cartGet));
+    document.location.replace("http://127.0.0.1:5500/cart.html");
 });
-
-let basketGet = JSON.parse(localStorage.getItem("basket"));
-for(i=basketGet.length-1; i>=0;i--){
-console.log(basketGet[i]);
-
-}
+let cartGet = JSON.parse(localStorage.getItem("cart"));
 }
 
 const fetchCall=()=>{
   if(window.location.search)
-fetch(url + objectId)
-  .then(response => response.json())
-  .then(response=>selectedProduct(response))
-  .catch(err=>console.error(err));
+    fetch(url + objectId)
+    .then(response => response.json())
+    .then(response=>selectedProduct(response))
+    .catch(err=>console.error(err));
 }
 fetchCall();
 

@@ -4,11 +4,12 @@ const mainFetch = () => {
   fetch(url)
   
     .then((response) => response.json())
+    
+    
     .then(function (data) {
       for (i = 0; i < data.length; i++) {
         insertProduct(data[i]);
-      }
-      
+      } 
     })
     .catch(err=>console.error(err))
 };
@@ -50,7 +51,7 @@ const insertProduct = (produit) => {
   let idProduct = document.createElement("a");
   idProduct.className="text-decoration-none stretched-link";
   idProduct.href='product.html?id=' + produit._id;
-  idProduct.innerHTML="Voir la fiche produit";
+  idProduct.innerHTML="Check it out";
   div.appendChild(idProduct);
   
 
