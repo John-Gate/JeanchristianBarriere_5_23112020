@@ -3,7 +3,7 @@ let mainForm = document.getElementsByClassName("mainForm");
 let cartGet = JSON.parse(localStorage.getItem("cart"));
 let products = [];
 let total = 0;
-
+//Function reaching local storage elements, and display them.
 const cartList = () => {
   if (cartGet != null) {
     for (i = cartGet.length - 1; i >= 0; i--) {
@@ -22,7 +22,7 @@ const trTitle = (nameRow) => {
   return th;
 };
 
-//function pour faire apparaitre elements du table
+//function to display table elements
 let tbody = document.createElement("tbody");
 tbody.className = "cart-items";
 
@@ -31,7 +31,7 @@ const trProduct = (product) => {
   totalSum(total);
 
   let tr2 = document.createElement("tr");
-  //Name + photo Section    RAJOUTER PHOTO AUSSI
+  //Display Products Name/Title
   let productName = document.createElement("td");
   productName.textContent = product.name;
   productName.className = " col-1 mx-auto";
@@ -41,21 +41,8 @@ const trProduct = (product) => {
   productPriceUnit.className = "cart-price";
   productPriceUnit.textContent = product.price / 100 + " $";
   tr2.appendChild(productPriceUnit);
-  //Quantity section
-  let productQuantity = document.createElement("input");
-  productQuantity.className = "quantity-input col-7";
-  productQuantity.type = "number";
-  productQuantity.value = "1";
-  tr2.appendChild(productQuantity);
-  //Remove Button
-  let removeBtn = document.createElement("button");
-  removeBtn.className = "btn-danger  mx-4 my-1";
-  removeBtn.textContent = "Remove";
-  tr2.appendChild(removeBtn);
-
   tbody.appendChild(tr2);
 };
-//Creation des boutons de quantites
 
 //function total price
 const totalSum = (total) => {
@@ -70,12 +57,12 @@ let showCart = () => {
     let divCountCart = document.createElement("div");
     divCountCart.id = "countCart";
     divCountCart.className = "mx-auto mb-3 text-secondary";
-    let x = cartGet.length;
+    let itemNumbers = cartGet.length;
     //En fonction du nombre d item:
     if (
-      cartGet.length == 1
-        ? (divCountCart.textContent = "(" + " " + x + " " + "item)")
-        : (divCountCart.textContent = "(" + x + " " + "items)")
+      itemNumbers == 1
+        ? (divCountCart.textContent = "(" + " " + itemNumbers + " " + "item)")
+        : (divCountCart.textContent = "(" + itemNumbers + " " + "items)")
     );
 
     mainCart.appendChild(divCountCart);
@@ -95,10 +82,8 @@ let showCart = () => {
     //th
     tr.appendChild(trTitle("Item"));
     tr.appendChild(trTitle("Price"));
-    tr.appendChild(trTitle("Quantity"));
     thead.appendChild(tr);
     //Row des elements
-
     table.appendChild(tbody);
     //fonction de creation des elements
     let cartFilled = cartGet.forEach((product) => {
@@ -106,47 +91,16 @@ let showCart = () => {
     });
     return cartFilled;
   } else {
-    //CENTRER LE TEXTE EN HTML
     mainForm[0].className = "d-none text-center";
     displayCartTitle = document.createElement("h2");
     displayCartTitle.textContent = "Your cart is empty";
     mainCart.appendChild(displayCartTitle);
   }
 };
-
 showCart();
 
-/////////////////////////////////////RETRAVAILLER QUANTITE////////////////////////
-//Function Remove Button Listener
-const btnRemoveListener = () => {
-  let btnRemoveItem = document.getElementsByClassName("btn-danger");
-  for (let i = 0; i < btnRemoveItem.length; i++) {
-    let btnR = btnRemoveItem[i];
-    btnR.addEventListener("click", function (event) {
-      let btnRemoveClicked = event.target;
-      btnRemoveClicked.parentElement.remove();
-      updateCartTotal();
-    });
-  }
-};
-btnRemoveListener();
-
-const updateCartTotal = () => {
-  console.log("clicked");
-  let cartItemContainer = document.getElementsByClassName("cart-items")[0];
-  let cartRows = cartItemContainer.getElementsByClassName("cart-row");
-  for (i = 0; i < cartRows.length; i++) {
-    let cartRow = cartRows[i];
-    let priceElement = cartRow.getElementsByClassName("cart-price")[0];
-    let quantityElement = cartRow.getElementsByClassName("quantity-input")[0];
-    console.log(priceElement, quantityElement);
-  }
-};
-
-//Function principale anonyme sortir la fonction///////////////////////////////////////////////
-
-document.getElementById("formSubmit").addEventListener("submit", (event) => {
-  /////Avoid repeat aler message
+const clickForm = (event) => {
+  /////Avoid repeat alerte message
   let inputs = document.querySelectorAll("input");
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].classList.remove("is-invalid");
@@ -197,13 +151,13 @@ document.getElementById("formSubmit").addEventListener("submit", (event) => {
         validateEmail,
       ],
       isAFieldInvalid = formValidation(fields, fieldsValidity);
-
     //Si l'un des champs a été vidé ...
     if (isAFieldInvalid) return;
-
     fetchPost(contact, products);
   }
-});
+};
+
+document.getElementById("formSubmit").addEventListener("submit", clickForm);
 
 //function validation
 const formValidation = (fields, fieldsValidity) => {
@@ -228,7 +182,6 @@ const formValidation = (fields, fieldsValidity) => {
         default:
           message = "Email cannot be empty";
       }
-
       //Création et stylisation de l'alerte
       alertMessage(message, fields[i]);
     } else {
@@ -237,10 +190,10 @@ const formValidation = (fields, fieldsValidity) => {
   }
   return returnField;
 };
-
-function validateForm(input, regularFormRegEx) {
+//function
+const validateForm = (input, regularFormRegEx) => {
   return input.value.match(regularFormRegEx) !== null;
-}
+};
 //function alert
 const alertMessage = (message, input) => {
   let alert = document.createElement("div");
@@ -249,7 +202,6 @@ const alertMessage = (message, input) => {
   alert.classList.add("alertMessages", "invalid-feedback");
   input.parentElement.appendChild(alert);
 };
-
 //function fetchpost
 const fetchPost = (contact, products) => {
   fetch("http://localhost:3000/api/cameras/order", {
@@ -260,8 +212,9 @@ const fetchPost = (contact, products) => {
       products: products,
     }),
   })
-    .then((response) => response.json())
-    .then((order) => {
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .then((order) => {
       localStorage.setItem("orderId", order.orderId);
       window.location.href = "order.html";
     })

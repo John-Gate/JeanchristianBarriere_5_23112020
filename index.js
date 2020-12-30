@@ -1,5 +1,4 @@
 let url = "http://localhost:3000/api/cameras";
-
 const mainFetch = () => {
   fetch(url)
     .then((response) => response.json())
