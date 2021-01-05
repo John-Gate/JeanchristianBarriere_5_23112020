@@ -3,7 +3,8 @@ let mainForm = document.getElementsByClassName("mainForm");
 let cartGet = JSON.parse(localStorage.getItem("cart"));
 let products = [];
 let total = 0;
-//Function reaching local storage elements, and display them.
+
+//Reaching local storage elements, and display them.
 const cartList = () => {
   if (cartGet != null) {
     for (i = cartGet.length - 1; i >= 0; i--) {
@@ -14,7 +15,7 @@ const cartList = () => {
   }
 };
 cartList();
-//function pour faire apparaitre row Header du table
+//Creat Header Tab
 const trTitle = (nameRow) => {
   let th = document.createElement("th");
   th.textContent = nameRow;
@@ -22,7 +23,7 @@ const trTitle = (nameRow) => {
   return th;
 };
 
-//function to display table elements
+//Display table elements
 let tbody = document.createElement("tbody");
 tbody.className = "cart-items";
 
@@ -44,21 +45,21 @@ const trProduct = (product) => {
   tbody.appendChild(tr2);
 };
 
-//function total price
+//Total price
 const totalSum = (total) => {
   let sumOfAll = document.getElementById("total");
   sumOfAll.textContent = "Total : " + total + " $";
 };
 
-//--Reponse si panier vide ou non
+//If cart empty or not
 let showCart = () => {
   if (cartGet) {
-    //Nombre d'article total:
+    //Total items
     let divCountCart = document.createElement("div");
     divCountCart.id = "countCart";
     divCountCart.className = "mx-auto mb-3 text-secondary";
     let itemNumbers = cartGet.length;
-    //En fonction du nombre d item:
+    //Singular or plural for "item"
     if (
       itemNumbers == 1
         ? (divCountCart.textContent = "(" + " " + itemNumbers + " " + "item)")
@@ -67,7 +68,7 @@ let showCart = () => {
 
     mainCart.appendChild(divCountCart);
 
-    //Creation tableau
+    //Set up tab
     //table
     let table = document.createElement("table");
     table.id = "table";
@@ -83,9 +84,9 @@ let showCart = () => {
     tr.appendChild(trTitle("Item"));
     tr.appendChild(trTitle("Price"));
     thead.appendChild(tr);
-    //Row des elements
+    //Row 
     table.appendChild(tbody);
-    //fonction de creation des elements
+    //Generate Items
     let cartFilled = cartGet.forEach((product) => {
       products.push(product.id);
     });
@@ -151,7 +152,7 @@ const clickForm = (event) => {
         validateEmail,
       ],
       isAFieldInvalid = formValidation(fields, fieldsValidity);
-    //Si l'un des champs a été vidé ...
+    //If a field has been empty:
     if (isAFieldInvalid) return;
     fetchPost(contact, products);
   }
@@ -159,7 +160,7 @@ const clickForm = (event) => {
 
 document.getElementById("formSubmit").addEventListener("submit", clickForm);
 
-//function validation
+//Check up fields
 const formValidation = (fields, fieldsValidity) => {
   let returnField = false;
   for (let i = 0; i < fields.length; i++) {
@@ -182,7 +183,7 @@ const formValidation = (fields, fieldsValidity) => {
         default:
           message = "Email cannot be empty";
       }
-      //Création et stylisation de l'alerte
+      //Establish and design the alert
       alertMessage(message, fields[i]);
     } else {
       fields[i].classList.add("is-valid");
@@ -190,11 +191,11 @@ const formValidation = (fields, fieldsValidity) => {
   }
   return returnField;
 };
-//function
+//Regex checkup
 const validateForm = (input, regularFormRegEx) => {
   return input.value.match(regularFormRegEx) !== null;
 };
-//function alert
+//Alert 
 const alertMessage = (message, input) => {
   let alert = document.createElement("div");
   alert.appendChild(document.createTextNode(message));
@@ -202,7 +203,7 @@ const alertMessage = (message, input) => {
   alert.classList.add("alertMessages", "invalid-feedback");
   input.parentElement.appendChild(alert);
 };
-//function fetchpost
+//Fetchpost
 const fetchPost = (contact, products) => {
   fetch("http://localhost:3000/api/cameras/order", {
     method: "post",

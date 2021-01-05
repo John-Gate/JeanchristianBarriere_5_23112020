@@ -2,6 +2,7 @@ let cartItems = JSON.parse(localStorage.getItem("cartGet"));
 let productsID = [];
 let orderId = localStorage.getItem("orderId");
 let invoice = document.getElementsByClassName("invoice")[0];
+//Actualize the order area
 const order = () => {
   let invoiceNumber = document.createElement("p");
 

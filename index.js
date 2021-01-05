@@ -11,7 +11,7 @@ const mainFetch = () => {
 };
 window.onload = mainFetch;
 
-//// Fonction Pour La Creation Des Articles De L'Index
+//// Initiate the generation of the items
 const insertProduct = (produit) => {
   let mainArticle = document.querySelector("#main");
   let sectionCont = document.createElement("section");

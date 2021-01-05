@@ -1,9 +1,8 @@
-//Variable pour atteindre element specifique.
 let url = "http://localhost:3000/api/cameras/";
 const URLSParams = new URLSearchParams(window.location.search);
 let objectId = URLSParams.get("id");
 
-//HTML displayt
+//HTML display
 const selectedProduct = (produit) => {
   let mainArticle = document.querySelector("#main");
   let sectionCont = document.createElement("section");
@@ -45,7 +44,7 @@ const selectedProduct = (produit) => {
   select.className = "selectProd";
   let chooseProd = document.getElementsByClassName("selectProd");
 
-  //Boucle des differentes options du produit
+  //Loop over different product options
   for (i = 0; i < produit.lenses.length; i++) {
     let optionProduct = document.createElement("option");
     optionProduct.className = "option";
@@ -56,7 +55,7 @@ const selectedProduct = (produit) => {
   sectionCont.appendChild(div);
   storageProduct();
 };
-//Ajouter au panier
+//Add to the cart
 const storageProduct = () => {
   let cartButton = document.getElementsByClassName("button");
   cartButton[0].addEventListener("click", function () {
@@ -70,7 +69,7 @@ const storageProduct = () => {
   });
   let cartGet = JSON.parse(localStorage.getItem("cart"));
 };
-
+//Fetch Function
 const fetchCall = () => {
   if (window.location.search)
     fetch(url + objectId)
