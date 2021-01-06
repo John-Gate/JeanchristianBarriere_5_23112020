@@ -1,4 +1,5 @@
 let url = "http://localhost:3000/api/cameras";
+//
 const mainFetch = () => {
   fetch(url)
     .then((response) => response.json())
@@ -9,10 +10,11 @@ const mainFetch = () => {
     })
     .catch((err) => console.error(err));
 };
-window.onload = mainFetch;
+window.onload = mainFetch;//Execute a JavaScript immediately after a page has been loaded
 
 //// Initiate the generation of the items
 const insertProduct = (produit) => {
+  if(produit!=null){
   let mainArticle = document.querySelector("#main");
   let sectionCont = document.createElement("section");
   sectionCont.className = "card shadow col-4 mx-1 my-1";
@@ -49,6 +51,9 @@ const insertProduct = (produit) => {
   idProduct.href = "product.html?id=" + produit._id;
   idProduct.innerHTML = "Check it out";
   div.appendChild(idProduct);
-
+  
   sectionCont.appendChild(div);
+  }else{
+    console.error("Produit introuvable");
+  }
 };

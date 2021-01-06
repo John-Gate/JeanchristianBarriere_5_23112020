@@ -4,7 +4,7 @@ let cartGet = JSON.parse(localStorage.getItem("cart"));
 let products = [];
 let total = 0;
 
-//Reaching local storage elements, and display them.
+//Reaching local storage elements, and display them
 const cartList = () => {
   if (cartGet != null) {
     for (i = cartGet.length - 1; i >= 0; i--) {
@@ -85,7 +85,7 @@ let showCart = () => {
     tr.appendChild(trTitle("Price"));
     thead.appendChild(tr);
     //Row 
-    table.appendChild(tbody);
+    table.appendChild(tbody);//Add the differents items selected
     //Generate Items
     let cartFilled = cartGet.forEach((product) => {
       products.push(product.id);
@@ -101,23 +101,23 @@ let showCart = () => {
 showCart();
 
 const clickForm = (event) => {
-  /////Avoid repeat alerte message
+  //Avoid repeat alerte message & valid/invalid form because of Bootstrap
   let inputs = document.querySelectorAll("input");
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].classList.remove("is-invalid");
     inputs[i].classList.remove("is-valid");
   }
-
   let alertMessages = document.querySelectorAll(".alertMessages");
   for (let i = 0; i < alertMessages.length; i++) {
     alertMessages[i].remove();
   }
-
+  //
   if (cartGet !== null || cartGet != " ") {
     event.preventDefault();
+    //Regex
     let regularFormRegEx = /([A-Za-z0-9'\.\-\s\,]+)/;
     let emailFormRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i;
-
+    //Form value
     let firstNameId = document.getElementById("formFirstName");
     let firstName = firstNameId.value;
     let validateFirstName = validateForm(firstNameId, regularFormRegEx);
@@ -214,10 +214,11 @@ const fetchPost = (contact, products) => {
     }),
   })
   .then((response) => response.json())
-  .then((response) => console.log(response))
   .then((order) => {
       localStorage.setItem("orderId", order.orderId);
+      localStorage.setItem("totalPrice", total);
       window.location.href = "order.html";
     })
-    .catch((error) => alert("Un des champ du formulaire n'est pas correct !"));
+  .catch((error) => alert("Un des champ du formulaire n'est pas correct !"));
 };
+
