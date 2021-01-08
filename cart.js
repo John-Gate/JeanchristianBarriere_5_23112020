@@ -1,3 +1,4 @@
+let url = "http://localhost:3000/api/cameras/";
 let mainCart = document.querySelector("#mainCart");
 let mainForm = document.getElementsByClassName("mainForm");
 let cartGet = JSON.parse(localStorage.getItem("cart"));
@@ -6,13 +7,14 @@ let total = 0;
 
 //Reaching local storage elements, and display them
 const cartList = () => {
-  if (cartGet != null) {
+  if(cartGet != null){
     for (i = cartGet.length - 1; i >= 0; i--) {
       fetch(url + cartGet[i])
         .then((response) => response.json())
-        .then((response) => trProduct(response));
+        .then((response) => trProduct(response))
+        .catch((err) => console.error(err));
     }
-  }
+  }//show the "empy-cart" message
 };
 cartList();
 //Creat Header Tab
@@ -28,9 +30,6 @@ let tbody = document.createElement("tbody");
 tbody.className = "cart-items";
 
 const trProduct = (product) => {
-  total += product.price / 100;
-  totalSum(total);
-
   let tr2 = document.createElement("tr");
   //Display Products Name/Title
   let productName = document.createElement("td");
@@ -42,7 +41,11 @@ const trProduct = (product) => {
   productPriceUnit.className = "cart-price";
   productPriceUnit.textContent = product.price / 100 + " $";
   tr2.appendChild(productPriceUnit);
+
   tbody.appendChild(tr2);
+
+  total += product.price / 100;
+  totalSum(total);
 };
 
 //Total price
@@ -56,22 +59,21 @@ let showCart = () => {
   if (cartGet) {
     //Total items
     let divCountCart = document.createElement("div");
-    divCountCart.id = "countCart";
     divCountCart.className = "mx-auto mb-3 text-secondary";
     let itemNumbers = cartGet.length;
+
     //Singular or plural for "item"
     if (
       itemNumbers == 1
-        ? (divCountCart.textContent = "(" + " " + itemNumbers + " " + "item)")
-        : (divCountCart.textContent = "(" + itemNumbers + " " + "items)")
+        ? (divCountCart.textContent = "Your " + itemNumbers + " " + "item")
+        : (divCountCart.textContent = "Your "+ itemNumbers + " " + "items")
     );
 
     mainCart.appendChild(divCountCart);
 
     //Set up tab
     //table
-    let table = document.createElement("table");
-    table.id = "table";
+    let table = document.createElement("table");  
     table.className = "table col-3 mx-auto";
     mainCart.appendChild(table);
     //thead
@@ -111,7 +113,7 @@ const clickForm = (event) => {
   for (let i = 0; i < alertMessages.length; i++) {
     alertMessages[i].remove();
   }
-  //
+  
   if (cartGet !== null || cartGet != " ") {
     event.preventDefault();
     //Regex
@@ -133,6 +135,7 @@ const clickForm = (event) => {
     let emailId = document.getElementById("formEmail");
     let email = emailId.value;
     let validateEmail = validateForm(emailId, emailFormRegEx);
+    //Contact & Products object: to post to validate the order
     let contact = {
       firstName: firstName,
       lastName: lastName,
@@ -141,9 +144,14 @@ const clickForm = (event) => {
       email: email,
     };
     let products = cartGet;
-    let objectPost = { contact, products };
 
-    let fields = [firstNameId, lastNameId, addressId, cityId, emailId],
+    let fields = [
+      firstNameId,
+      lastNameId,
+      addressId,
+      cityId,
+      emailId
+      ],
       fieldsValidity = [
         validateFirstName,
         validateLastName,
@@ -195,7 +203,7 @@ const formValidation = (fields, fieldsValidity) => {
 const validateForm = (input, regularFormRegEx) => {
   return input.value.match(regularFormRegEx) !== null;
 };
-//Alert 
+//Alert ---boostrap theme "alert" & the message
 const alertMessage = (message, input) => {
   let alert = document.createElement("div");
   alert.appendChild(document.createTextNode(message));
@@ -217,7 +225,7 @@ const fetchPost = (contact, products) => {
   .then((order) => {
       localStorage.setItem("orderId", order.orderId);
       localStorage.setItem("totalPrice", total);
-      window.location.href = "order.html";
+      window.location.href = "order.html";//redirection
     })
   .catch((error) => alert("Un des champ du formulaire n'est pas correct !"));
 };

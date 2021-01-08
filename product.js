@@ -2,21 +2,15 @@ let url = "http://localhost:3000/api/cameras/";
 const URLSParams = new URLSearchParams(window.location.search);//return object instance to use "get"
 let objectId = URLSParams.get("id");
 
-
 //Fetch Function
 const fetchCall = () => {
-  
-
-   if (window.location.search)
- 
-
+     if (window.location.search)
      fetch(url + objectId)
       .then((response) => response.json())
       .then((response) => selectedProduct(response))
       .catch((err) => console.error(err));
 };
 fetchCall();
-
 
 //HTML display
 const selectedProduct = (product) => {
@@ -59,7 +53,6 @@ const selectedProduct = (product) => {
 
   let select = document.createElement("select");
   select.className = "selectProd";
-  let chooseProd = document.getElementsByClassName("selectProd");
 
   //Loop over different product options
   for (i = 0; i < product.lenses.length; i++) {
@@ -87,5 +80,4 @@ const storageProduct = () => {
     localStorage.setItem("cart", JSON.stringify(cartGet));//localStorage allow string only(parse inverse)
     document.location.replace("http://127.0.0.1:5500/cart.html");//redirection
   });
-  //let cartGet = JSON.parse(localStorage.getItem("cart"));
 };
