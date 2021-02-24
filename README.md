@@ -19,9 +19,9 @@ Construction d’un site web e-commerce JS :
 >Créer un premier MVP pour démontrer le fonctionnement de ses applications(Selection de produit, Panier fonctionel, Commander).  
 
 ## Installation
-Cloner  https://github.com/OpenClassrooms-Student-Center/JWDP5.git 
-se deplacer depuis le terminal dans ce dossier
-executer npm install
+Cloner  https://github.com/OpenClassrooms-Student-Center/JWDP5.git   
+se deplacer depuis le terminal dans ce dossier  
+executer npm install  
 puis node server
 
 ## Éléments fournis
