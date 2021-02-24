@@ -23,7 +23,7 @@ Cloner  https://github.com/OpenClassrooms-Student-Center/JWDP5.git
 se deplacer depuis le terminal dans ce dossier  
 executer `npm install`  
 puis `node server`
-Le server devrait se lancer sur 'localhost with default port 3000'. 
+Le server devrait se lancer sur `localhost with default port 3000`. 
 
 ## Éléments fournis
 
