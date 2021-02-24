@@ -21,8 +21,8 @@ Construction d’un site web e-commerce JS :
 ## Installation
 Cloner  https://github.com/OpenClassrooms-Student-Center/JWDP5.git   
 se deplacer depuis le terminal dans ce dossier  
-executer npm install  
-puis node server
+executer `npm install`  
+puis `node server`
 
 ## Éléments fournis
 
