@@ -13,9 +13,9 @@ Construction d’un site web e-commerce JS :
 * Interagir avec un service web avec JS.
 * Valider des données issues de ressource externe et gérer des évènements JS.
 
-### La chouette agence
+### Orinoco
 
-![Image text](https://github.com/John-Gate/jeanchristianbarriere_4_09112020/blob/main/img/logo.png)
+![Image text](https://github.com/John-Gate/jeanchristianbarriere_5_23112020/blob/main/logo.png)
 >Le site web apparait à la deuxieme page des moteurs de recherche. Il faut améliorer son referencement. 
 
 ## Installation
