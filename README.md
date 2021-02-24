@@ -22,11 +22,11 @@ Construction d’un site web e-commerce JS :
 Cloner  https://github.com/OpenClassrooms-Student-Center/JWDP5.git   
 se deplacer depuis le terminal dans ce dossier  
 executer `npm install`  
-puis `node server`
+puis `node server`  
 Le server devrait se lancer sur `localhost with default port 3000`. 
 
 ## Éléments fournis
-
+Backend (_Fournit lors de l'installation_)
 
 ##  Cahier des charges
 _Pour le MVP, la personnalisation du produit ne sera pas fonctionnelle :_  
@@ -41,8 +41,6 @@ _Pour le MVP, la personnalisation du produit ne sera pas fonctionnelle :_
 ## Notes
 L'IDE que j'ai utilisé est *Visual Studio Code*.  
 Le site passe le **W3C** pour HTML et CSS.  
-Utilisation de [Wave](https://wave.webaim.org/) pour vérifier l'accessibilité.  
-Utilisation de [GtMetrix](https://gtmetrix.com/) pour vérifier l'optimisation.
 
 ## Évaluation
 :heavy_check_mark: Ce projet a été validé par le jury d'OpenClassrooms le vendredi 8 janvier 2021.
