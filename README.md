@@ -28,7 +28,7 @@ puis node server
 
 
 ##  Cahier des charges
-_Pour le MVP, la personnalisation du produit ne sera pas fonctionnelle :_
+_Pour le MVP, la personnalisation du produit ne sera pas fonctionnelle :_  
 la page contenant un seul article aura un menu déroulant permettant à l'utilisateur de choisir une option de personnalisation,
 *mais celle-ci ne sera ni envoyée au serveur*
 *ni reflétée dans la réponse du serveur.*
