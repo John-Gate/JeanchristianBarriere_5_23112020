@@ -44,7 +44,7 @@ Utilisation de [Wave](https://wave.webaim.org/) pour vérifier l'accessibilité.
 Utilisation de [GtMetrix](https://gtmetrix.com/) pour vérifier l'optimisation.
 
 ## Évaluation
-:heavy_check_mark: Ce projet a été validé par le jury d'OpenClassrooms le vendredi 20 novembre 2020.
+:heavy_check_mark: Ce projet a été validé par le jury d'OpenClassrooms le vendredi 8 janvier 2021.
 
 ## Contact
 * [Email](mailto:barrierejc@live.fr?subject=[GitHub]%20Source%20Han%20Sans)
